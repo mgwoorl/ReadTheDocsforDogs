@@ -1,4 +1,4 @@
-# MobileDogs_API
+## MobileDogs_API ##
 Конова и Галиулина
 
 # Описание проекта #
