@@ -12,3 +12,11 @@ class Login(User):
 class ResponseUserLogin(BaseModel):
     success: bool
     accessToken: str
+
+class LoginUser(User):
+    password: str
+    accessToken: str
+
+class ResponseUserLogin(BaseModel):
+    success: bool
+    message: str
