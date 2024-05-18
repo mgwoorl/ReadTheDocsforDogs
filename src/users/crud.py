@@ -5,9 +5,8 @@ import uuid
 from typing import Optional
 
 def create_user(db: Session, user: schemas.CreateUser) -> Optional[models.usersT]:
-    password = user.password
     accessToken = str(uuid.uuid4())[:8]
-    db.user = models.usersT(login=user.login, password=password, accessToken=accessToken)
+    db.user = models.usersT(login=user.login, password=user.password, accessToken=accessToken)
     db.add(db.user)
     db.commit()
     db.refresh(db.user)
