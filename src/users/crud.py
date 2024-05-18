@@ -15,3 +15,19 @@ def create_user(db: Session, user: schemas.CreateUser) -> Optional[models.usersT
 def find_user(db: Session, login: str) -> Optional[models.usersT]:
     user = db.query(models.usersT).filter_by(login=login).first()
     return user
+
+def check_password(db: Session, login: str, password: str) -> Optional[models.usersT]:
+    user = db.query(models.usersT).filter_by(login=login).first()
+
+    if password == user.password:
+        return user
+    else:
+        return None
+
+def check_token(db: Session, login: str, accessToken: str) -> Optional[models.usersT]:
+    user = db.query(models.usersT).filter_by(login=login).first()
+
+    if accessToken == user.accessToken:
+        return user
+    else:
+        return None
