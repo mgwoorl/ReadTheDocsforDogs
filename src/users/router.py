@@ -15,3 +15,16 @@ async def UserRegistration(user: schemas.CreateUser, db: DBSession = Depends(ses
     new_user = crud.create_user(db, user)
     result = schemas.ResponseUser(success=True, accessToken=new_user.accessToken)
     return result
+
+@router.post("/user/login", response_model=schemas.ResponseUserLogin)
+async def UserLogin(user: schemas.LoginUser, db: DBSession = Depends(session)):
+
+    if not crud.find_user(db, user.login):
+        raise exceptions.WrongLogin()
+    if not crud.check_password(db, user.login, user.password):
+        raise exceptions.WrongPassword()
+    if not crud.check_token(db, user.login, user.accessToken):
+        raise exceptions.WrongToken()
+
+    result = schemas.ResponseUserLogin(success=True, message="Вы успешно вошли в аккаунт")
+    return result
