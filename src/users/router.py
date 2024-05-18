@@ -8,7 +8,7 @@ from fastapi import APIRouter, Depends
 
 router = APIRouter()
 
-@router.post("/user/register", response_model=schemas.Response)
+@router.post("/user/registr", response_model=schemas.Response)
 async def UserRegistration(user: schemas.CreateUser, db: DBSession = Depends(session)):
     if crud.find_user(db, user.login):
         raise exceptions.BusyLogin()
