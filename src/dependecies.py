@@ -1,6 +1,6 @@
 from database import DBSession
 
-def get_db_session():
+def session():
     session = DBSession()
     try:
         yield session
