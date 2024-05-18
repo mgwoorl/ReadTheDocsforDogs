@@ -9,6 +9,6 @@ class CreateUser(User):
 class Login(User):
     password: str
 
-class Response(BaseModel):
+class ResponseUserLogin(BaseModel):
     success: bool
     accessToken: str
