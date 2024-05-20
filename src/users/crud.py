@@ -31,3 +31,10 @@ def check_token(db: Session, login: str, accessToken: str) -> Optional[models.us
         return user
     else:
         return None
+
+def create_task(db: Session, task: schemas.CreateTask) -> Optional[models.usersT]:
+    db.task = models.tasksT(user_token=task.accessToken, colar_id=task.colar_id, text=task.text)
+    db.add(db.task)
+    db.commit()
+    db.refresh(db.task)
+    return db.task
