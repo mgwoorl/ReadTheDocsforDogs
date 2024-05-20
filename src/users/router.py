@@ -28,3 +28,14 @@ async def UserLogin(user: schemas.LoginUser, db: DBSession = Depends(session)):
 
     result = schemas.ResponseUserLogin(success=True, message="Вы успешно вошли в аккаунт")
     return result
+
+
+@router.post("/user/creatTask", response_model=schemas.ResponseUser)
+async def UserCreateTask(task: schemas.CreateTask, db: DBSession = Depends(session)):
+    if not crud1.find_collar(db, task.collar_id):
+        raise exceptions1.NotExistCollar()
+    if not crud.find_user(db, task.login):
+        raise exceptions.WrongLogin()
+
+    result = schemas.ResponseUser(accessToken=task.accessToken, colar_token=task.colar_token, task=task.text)
+    return result
