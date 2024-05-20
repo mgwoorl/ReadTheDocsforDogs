@@ -20,3 +20,8 @@ class LoginUser(User):
 class ResponseUserLogin(BaseModel):
     success: bool
     message: str
+
+class CreateTask(BaseModel):
+    accessToken: str
+    colar_id: str
+    task: str
