@@ -7,3 +7,10 @@ class usersT(BaseDBModel):
     login = Column(String, unique=True, index=True)
     password = Column(String, unique=False, index=False)
     accessToken = Column(String, unique=False, index=False)
+    
+class tasksT(BaseDBModel):
+    __tablename__ = "tasks"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_token = Column(String, unique=False, index=True)
+    colar_id = Column(Integer, unique=False, index=True)
+    text = Column(String, unique=False, index=False)
